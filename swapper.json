@@ -1,0 +1,400 @@
+openapi: 3.0.3
+info:
+  title: Taxi-1.0
+  description: taxi driver cars
+  version: 1.0.11
+servers:
+   - url: http://127.0.0.1:8000/api
+     description: Dev Server
+paths:
+  /cars:
+    get:
+      tags:
+      - Cars
+      summary: Methods for get all cars
+      parameters:
+        - { in: query, name: page, schema: { type: integer }}
+        - { in: query, name: per_page, schema: { type: integer }}
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Cars"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+      - Cars
+      summary: Method for create Car
+      operationId: createCar
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Car"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+  /unused:
+     get:
+      tags:
+      - Cars
+      summary: Get all cars That has not Driver
+      parameters:
+        - { in: query, name: page, schema: { type: integer }}
+        - { in: query, name: per_page, schema: { type: integer }}
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Cars"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+  /with/driver:
+    post:
+      tags:
+      - Cars
+      summary: Method for create Cars with driver
+      operationId: createCarAndDriver
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Car"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+  /cars/{id}:
+    get:
+      tags:
+      - Cars
+      summary: Get all cars That has not Driver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: find car
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Car"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+    put:
+        tags:
+        - Cars
+        summary: Method for create Cars
+        operationId: updateCar
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Car"
+        responses:
+          '200':
+              description: Success
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Car"
+          'default':
+              description: Всё нестандартно
+              content:
+                application/json:
+                 schema:
+                  $ref: "#/components/schemas/Error"
+    delete:
+      summary: Method for delete car
+      tags:
+       - Cars
+      operationId: deleteCarById
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: delete car
+            schema:
+              type: integer
+              example: 3
+      responses:
+          '200':
+              description: delete was success
+              content:
+                application/json: {}
+          'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+
+  /drivers:
+    get:
+      tags:
+      - Drivers
+      summary: Methods for get all Drivers
+      parameters:
+        - { in: query, name: page, schema: { type: integer }}
+        - { in: query, name: per_page, schema: { type: integer }}
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Drivers"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+      - Cars
+      summary: Method for create Driver
+      operationId: createDriver
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Driver"
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Driver"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+  /drivers/{id}:
+    get:
+      tags:
+      - Drivers
+      summary: Methods for get  Driver by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: find Driver
+          schema:
+            type: integer
+            example: 3
+      '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Driver"
+      'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+      - Drivers
+      summary: Method for create Driver
+      operationId: updateDriver
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Driver"
+      responses:
+        '200':
+              description: Success
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Driver"
+        'default':
+              description: Всё нестандартно
+              content:
+                application/json:
+                 schema:
+                  $ref: "#/components/schemas/Error"
+    delete:
+      summary: Method for delete Driver
+      tags:
+       - Drivers
+      operationId: deleteDriverByid
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: delete Driver
+            schema:
+              type: integer
+              example: 3
+      responses:
+          '200':
+              description: delete was success
+              content:
+                application/json: {}
+          'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+
+  /drivers/free:
+    get:
+      tags:
+      - Drivers
+      summary: Methods for get all drivers that are free
+      parameters:
+        - { in: query, name: page, schema: { type: integer }}
+        - { in: query, name: per_page, schema: { type: integer }}
+      responses:
+        '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Drivers"
+        'default':
+            description: Всё нестандартно
+            content:
+              application/json:
+               schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Car:
+     type: object
+     required:
+       - name
+     properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+        driver:
+          type: object
+          properties:
+            car_id:
+             type: integer
+            name:
+             type: string
+    Cars:
+      allOf:
+        - $ref: "#/components/schemas/PaginatedResult"
+        - type: object
+          properties:
+            results:
+             type: array
+             items:
+              $ref: "#/components/schemas/Car"
+
+
+    Driver:
+     type: object
+     required:
+       - name
+     properties:
+        id:
+          type: integer
+          example: 1
+        car_id:
+          type: integer
+          example: 3
+        name:
+          type: string
+        created_at:
+          type: string
+        car:
+          nullable: true
+          type: object
+          properties:
+            id:
+             type: integer
+             example: 3
+            name:
+             type: string
+            created_at:
+             type: string
+    Drivers:
+      allOf:
+        - $ref: "#/components/schemas/PaginatedResult"
+        - type: object
+          properties:
+            results:
+             type: array
+             items:
+              $ref: "#/components/schemas/Driver"
+    PaginatedResult:
+      type: object
+      properties:
+        total: { type: number }
+        page: { type: number }
+        per_page: { type: number }
+        has_next: { type: boolean }
+        has_prev: { type: boolean }
+        results: { type: array, items: {} }
+    Error:
+      type: object
+      required:
+       - code
+       - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
